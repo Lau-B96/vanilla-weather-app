@@ -9,7 +9,7 @@ h1 {
 h5 {
   font-variant-caps: small-caps;
   color: rgb(77, 135, 161);
-  margin: 0;
+  margin-bottom: 10px;
 }
 
 ul {
@@ -54,12 +54,12 @@ a {
 
 #weather-description {
   margin: 0 auto;
+  text-transform: capitalize;
 }
 
 .today-icon {
   width: 25px;
-  display: block;
-  margin: 5px auto;
+  margin: 5px 10%;
 }
 
 .weather-wrapper {
@@ -74,7 +74,7 @@ a {
   margin: 10px auto;
 }
 
-.current-temperature {
+#current-temperature {
   font-weight: bold;
   font-size: 54px;
   text-align: right;

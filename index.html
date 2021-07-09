@@ -12,6 +12,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="weather-wrapper">
@@ -23,7 +24,7 @@
               placeholder="Enter a city"
               autocomplete="off"
               autofocus
-            />
+            /><p></p>
           </form>
           <button>
             <img id="search-button" src="img/search.svg" title="Search" />
@@ -51,7 +52,7 @@
             </div>
             <div class="col-sm-3">
               <div class="row">
-                <div class="col-8 current-temperature">21</div>
+                <div class="col-8" id="current-temperature">21</div>
                 <div class="col-4 units">
                   <small><a href="#">ºC</a><br /><a href="#">ºF</a></small>
                 </div>
@@ -65,28 +66,28 @@
                 src="img/020-thermometer.svg"
                 title="Maximum Temperature"
                 class="today-icon"
-              />
+              /><span id="max-temp-today"></span>
             </div>
             <div class="col-3">
               <img
                 src="img/018-thermometer.svg"
                 title="Minimum Temperature"
                 class="today-icon"
-              />
+              /><span id="min-temp-today"></span>
             </div>
             <div class="col-3">
               <img
                 src="img/017-wind.svg"
                 title="Wind Speed"
                 class="today-icon"
-              />
+              /><span id="wind"></span>
             </div>
             <div class="col-3">
               <img
                 src="img/007-drops.svg"
                 title="Humidity"
                 class="today-icon"
-              />
+              /><span id="humidity"></span>
             </div>
           </div>
 

@@ -31,6 +31,11 @@ let month = months[now.getMonth()];
 let date = now.getDate();
 let hour = now.getHours();
 let minutes = now.getMinutes();
+if (hour < 10) {
+  hour = `0${hour}`;
+} else {
+  hour;
+}
 if (minutes < 10) {
   minutes = `0${minutes}`;
 } else {
@@ -38,3 +43,65 @@ if (minutes < 10) {
 }
 
 currentDate.innerHTML = `${weekDay}, ${month} ${date}, ${hour}:${minutes}`;
+
+function searchCity(cityEntered) {
+  let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityEntered}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
+}
+
+function searchForCity(event) {
+  event.preventDefault();
+  if (document.querySelector("input").value !== "") {
+    event.preventDefault();
+    let cityEntered = document.querySelector("input").value;
+    searchCity(cityEntered);
+  } else {
+    alert("Please enter a city or search for your current location 🗺");
+    searchCity("Porto");
+  }
+}
+
+function displayWeather(response) {
+  let cityHeading = document.querySelector("h1");
+  cityHeading.innerHTML = response.data.name;
+  let cityEntered = document.querySelector("input");
+  cityEntered.value = "";
+  let currentTemperature = Math.round(response.data.main.temp);
+  let temp = document.querySelector("#current-temperature");
+  temp.innerHTML = currentTemperature;
+  let tempDescription = document.querySelector("#weather-description");
+  tempDescription.innerHTML = response.data.weather[0].description;
+  let maxTemp = document.querySelector("#max-temp-today");
+  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)}ºC`;
+  let minTemp = document.querySelector("#min-temp-today");
+  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)}ºC`;
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
+}
+
+function showPosition(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+
+  let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayWeather);
+}
+
+function getCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", searchForCity);
+let searchButton = document.querySelector("#search-button");
+searchButton.addEventListener("click", searchForCity);
+
+let geoButton = document.querySelector("#location-button");
+geoButton.addEventListener("click", getCurrentPosition);
+
+searchCity("Porto");
