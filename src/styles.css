@@ -1,0 +1,25 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#current-temperature-icon {
+  width: 60px;
+}
+
+#today-icon {
+  width: 25px;
+}
+
+
+
+.weather-wrapper {
+  margin: 60px auto;
+  width: 600px;
+}
+
+.weather-app {
+  border-radius: 5px;
+  border: 1px solid #d3ddea;
+  padding: 20px;
+  margin: 10px auto;
+}
