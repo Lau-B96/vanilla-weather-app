@@ -47,10 +47,13 @@ a {
 }
 
 #current-temperature-icon {
-  width: 60px;
-  position: relative;
-  top: 16.5px;
-  left: 4.5px;
+  width: 80px;
+  display: block;
+  margin: 20px auto;
+}
+
+#weather-description {
+  margin: 0 auto;
 }
 
 .today-icon {

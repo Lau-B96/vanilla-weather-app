@@ -38,20 +38,25 @@
         </div>
         <div class="weather-app">
           <div class="row">
-            <div class="col-6">
+            <div class="col-sm-6">
               <h1 id="city">Porto</h1>
               <p id="current-time">Current Time</p>
             </div>
-            <div class="col-2 weather-temperature">
+            <div class="col-sm-3 weather-temperature">
               <img
                 id="current-temperature-icon"
                 src="img/022-sun.svg"
                 alt="sunny"
               />
             </div>
-            <div class="col-2 current-temperature">21</div>
-            <div class="col-1 units">
-              <small><a href="#">ºC</a><br /><a href="#">ºF</a></small>
+            <div class="col-sm-3">
+              <div class="row">
+                <div class="col-8 current-temperature">21</div>
+                <div class="col-4 units">
+                  <small><a href="#">ºC</a><br /><a href="#">ºF</a></small>
+                </div>
+              </div>
+              <div class="row" id="weather-description">Description</div>
             </div>
           </div>
           <div class="row today-info">
