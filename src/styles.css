@@ -4,13 +4,14 @@ body {
 
 #current-temperature-icon {
   width: 60px;
+  position: relative;
+  top: 16.5px;
+  left: 4.5px;
 }
 
 #today-icon {
   width: 25px;
 }
-
-
 
 .weather-wrapper {
   margin: 60px auto;
@@ -22,4 +23,22 @@ body {
   border: 1px solid #d3ddea;
   padding: 20px;
   margin: 10px auto;
+}
+
+.current-temperature {
+  font-weight: bold;
+  font-size: 54px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+div.units {
+  text-align: left;
+  padding: 0;
+}
+
+.units small {
+  font-size: 12px;
+  position: relative;
+  top: 16.5px;
 }
