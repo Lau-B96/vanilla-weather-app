@@ -2,6 +2,21 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h1 {
+  font-size: 60px;
+}
+
+h5 {
+  font-variant-caps: small-caps;
+  color: rgb(77, 135, 161);
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 #current-temperature-icon {
   width: 60px;
   position: relative;
@@ -9,8 +24,10 @@ body {
   left: 4.5px;
 }
 
-#today-icon {
+.today-icon {
   width: 25px;
+  display: block;
+  margin: 5px auto;
 }
 
 .weather-wrapper {
@@ -41,4 +58,30 @@ div.units {
   font-size: 12px;
   position: relative;
   top: 16.5px;
+}
+
+.today-info {
+  margin-bottom: 30px;
+}
+.days {
+  padding: 10px;
+  transition: all ease-in-out;
+}
+
+.days:hover {
+  border: 1px solid #d3ddea;
+  border-radius: 5px;
+  background-color: rgba(211, 221, 234, 0.1);
+}
+
+.forecast-icon {
+  width: 35px;
+  display: block;
+  margin: 0 auto 5px;
+}
+
+.forecast-temp-icon {
+  width: 15px;
+  display: block;
+  margin: 0 auto 2px;
 }
