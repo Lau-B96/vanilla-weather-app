@@ -17,6 +17,35 @@ ul {
   padding: 0;
 }
 
+form {
+  display: inline-block;
+}
+
+input {
+  padding: 10px;
+  background-color: rgba(211, 221, 234, 0.6);
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+}
+
+a {
+  color: rgb(77, 135, 161);
+}
+
+#search-button {
+  width: 30px;
+}
+
+#location-button {
+  width: 30px;
+}
+
 #current-temperature-icon {
   width: 60px;
   position: relative;
