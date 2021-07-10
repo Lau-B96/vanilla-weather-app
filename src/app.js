@@ -65,6 +65,8 @@ function searchForCity(event) {
 function displayWeather(response) {
   let cityHeading = document.querySelector("h1");
   cityHeading.innerHTML = response.data.name;
+  let country = document.querySelector(".country");
+  country.innerHTML = response.data.sys.country;
   let cityEntered = document.querySelector("input");
   cityEntered.value = "";
   let currentTemperature = Math.round(response.data.main.temp);
@@ -80,6 +82,10 @@ function displayWeather(response) {
   wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
+  let weatherIcon = document.querySelector("#current-temperature-icon");
+  let icon = response.data.weather[0].icon;
+  weatherIcon.setAttribute("src", `img/${icon}.svg`);
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
   let currentDate = document.querySelector("#current-time");
   let timeZoneOffset = response.data.timezone;
   currentDate.innerHTML = formatDate(

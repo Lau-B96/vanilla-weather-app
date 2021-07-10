@@ -3,7 +3,13 @@ body {
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 40px;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+p {
+  margin: 10px 0;
 }
 
 h5 {
@@ -116,4 +122,8 @@ div.units {
   width: 15px;
   display: block;
   margin: 0 auto 2px;
+}
+
+.country {
+  font-size: 20px;
 }
