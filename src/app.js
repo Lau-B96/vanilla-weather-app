@@ -1,5 +1,4 @@
 function formatDate(timestamp) {
-  console.log(timestamp);
   let days = [
     "Sunday",
     "Monday",
@@ -41,7 +40,7 @@ function formatDate(timestamp) {
   } else {
     minutes;
   }
-  console.log(`${weekDay}, ${month} ${day}, ${hour}:${minutes}`);
+
   return `${weekDay}, ${month} ${day}, ${hour}:${minutes}`;
 }
 
@@ -83,7 +82,6 @@ function displayWeather(response) {
   humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
   let currentDate = document.querySelector("#current-time");
   let timeZoneOffset = response.data.timezone;
-  console.log(timeZoneOffset);
   currentDate.innerHTML = formatDate(
     (response.data.dt + (timeZoneOffset - 3600)) * 1000
   );
