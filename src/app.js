@@ -1,48 +1,49 @@
-let currentDate = document.querySelector("#current-time");
+function formatDate(timestamp) {
+  console.log(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-let now = new Date();
-let weekDay = days[now.getDay()];
-let month = months[now.getMonth()];
-let date = now.getDate();
-let hour = now.getHours();
-let minutes = now.getMinutes();
-if (hour < 10) {
-  hour = `0${hour}`;
-} else {
-  hour;
+  let now = new Date(timestamp);
+  let weekDay = days[now.getDay(timestamp)];
+  let month = months[now.getMonth(timestamp)];
+  let day = now.getDate(timestamp);
+  let hour = now.getHours(timestamp);
+  let minutes = now.getMinutes(timestamp);
+  if (hour < 10) {
+    hour = `0${hour}`;
+  } else {
+    hour;
+  }
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  } else {
+    minutes;
+  }
+  console.log(`${weekDay}, ${month} ${day}, ${hour}:${minutes}`);
+  return `${weekDay}, ${month} ${day}, ${hour}:${minutes}`;
 }
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-} else {
-  minutes;
-}
-
-currentDate.innerHTML = `${weekDay}, ${month} ${date}, ${hour}:${minutes}`;
 
 function searchCity(cityEntered) {
   let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
@@ -80,6 +81,12 @@ function displayWeather(response) {
   wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
+  let currentDate = document.querySelector("#current-time");
+  let timeZoneOffset = response.data.timezone;
+  console.log(timeZoneOffset);
+  currentDate.innerHTML = formatDate(
+    (response.data.dt + (timeZoneOffset - 3600)) * 1000
+  );
 }
 
 function showPosition(position) {
