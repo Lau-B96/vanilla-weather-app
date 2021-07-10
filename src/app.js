@@ -64,30 +64,34 @@ function searchForCity(event) {
 
 function displayWeather(response) {
   let cityHeading = document.querySelector("h1");
-  cityHeading.innerHTML = response.data.name;
   let country = document.querySelector(".country");
-  country.innerHTML = response.data.sys.country;
   let cityEntered = document.querySelector("input");
-  cityEntered.value = "";
-  let currentTemperature = Math.round(response.data.main.temp);
   let temp = document.querySelector("#current-temperature");
-  temp.innerHTML = currentTemperature;
   let tempDescription = document.querySelector("#weather-description");
-  tempDescription.innerHTML = response.data.weather[0].description;
   let maxTemp = document.querySelector("#max-temp-today");
-  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)}ºC`;
   let minTemp = document.querySelector("#min-temp-today");
-  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)}ºC`;
   let wind = document.querySelector("#wind");
-  wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
   let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
   let weatherIcon = document.querySelector("#current-temperature-icon");
   let icon = response.data.weather[0].icon;
-  weatherIcon.setAttribute("src", `img/${icon}.svg`);
-  weatherIcon.setAttribute("alt", response.data.weather[0].description);
   let currentDate = document.querySelector("#current-time");
   let timeZoneOffset = response.data.timezone;
+
+  celsiusTemperature = Math.round(response.data.main.temp);
+  celsiusMaxTemperature = Math.round(response.data.main.temp_max);
+  celsiusMinTemperature = Math.round(response.data.main.temp_min);
+
+  cityEntered.value = "";
+  cityHeading.innerHTML = response.data.name;
+  country.innerHTML = response.data.sys.country;
+  temp.innerHTML = Math.round(response.data.main.temp);
+  tempDescription.innerHTML = response.data.weather[0].description;
+  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)}ºC`;
+  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)}ºC`;
+  wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
+  humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
+  weatherIcon.setAttribute("src", `img/${icon}.svg`);
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
   currentDate.innerHTML = formatDate(
     (response.data.dt + (timeZoneOffset - 3600)) * 1000
   );
@@ -107,6 +111,42 @@ function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+
+  let temp = document.querySelector("#current-temperature");
+  let maxTemp = document.querySelector("#max-temp-today");
+  let minTemp = document.querySelector("#min-temp-today");
+
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  let fahrenheitMaxTemp = (celsiusMaxTemperature * 9) / 5 + 32;
+  let fahrenheitMinTemp = (celsiusMinTemperature * 9) / 5 + 32;
+
+  temp.innerHTML = Math.round(fahrenheitTemp);
+  maxTemp.innerHTML = `${Math.round(fahrenheitMaxTemp)}ºF`;
+  minTemp.innerHTML = `${Math.round(fahrenheitMinTemp)}ºF`;
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+
+  let temp = document.querySelector("#current-temperature");
+  let maxTemp = document.querySelector("#max-temp-today");
+  let minTemp = document.querySelector("#min-temp-today");
+
+  temp.innerHTML = Math.round(celsiusTemperature);
+  maxTemp.innerHTML = `${Math.round(celsiusMaxTemperature)}ºC`;
+  minTemp.innerHTML = `${Math.round(celsiusMinTemperature)}ºC`;
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+}
+
+let celsiusTemperature = null;
+let celsiusMaxTemperature = null;
+let celsiusMinTemperature = null;
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", searchForCity);
 let searchButton = document.querySelector("#search-button");
@@ -114,5 +154,11 @@ searchButton.addEventListener("click", searchForCity);
 
 let geoButton = document.querySelector("#location-button");
 geoButton.addEventListener("click", getCurrentPosition);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 searchCity("Porto");

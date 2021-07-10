@@ -129,3 +129,14 @@ div.units {
 .country {
   font-size: 20px;
 }
+
+.active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
+
+.active:hover {
+  color: black;
+  text-decoration: none;
+}
