@@ -59,8 +59,8 @@ a {
 }
 
 #weather-description {
-  margin: 0 auto;
   text-transform: capitalize;
+  text-align: center;
 }
 
 .today-icon {
