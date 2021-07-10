@@ -17,26 +17,30 @@
   <body>
     <div class="weather-wrapper">
       <div class="container">
-        <div class="search-engine">
-          <form id="search-form">
-            <input
-              type="text"
-              placeholder="Enter a city"
-              autocomplete="off"
-              autofocus
-            />
-            <p></p>
-          </form>
-          <button>
-            <img id="search-button" src="img/search.svg" title="Search" />
-          </button>
-          <button>
-            <img
-              id="location-button"
-              src="img/map.svg"
-              title="Your current location"
-            />
-          </button>
+        <div class="row search-engine">
+          <div class="col-9">
+            <form id="search-form">
+              <input
+                type="search"
+                placeholder="Enter a city"
+                autocomplete="off"
+                autofocus
+              />
+              <p></p>
+            </form>
+          </div>
+          <div class="col-3">
+            <button>
+              <img id="search-button" src="img/search.svg" title="Search" />
+            </button>
+            <button>
+              <img
+                id="location-button"
+                src="img/map.svg"
+                title="Your current location"
+              />
+            </button>
+          </div>
         </div>
         <div class="weather-app">
           <div class="row">
