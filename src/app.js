@@ -62,6 +62,57 @@ function searchForCity(event) {
   }
 }
 
+function displayForecast() {
+  let forecast = document.querySelector("#forecast-section");
+
+  let forecastDays = ["Thu", "Fri", "Sat"];
+
+  let forecastHTML = "";
+  forecastDays.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col days">
+              <div class="day-title">${day}</div>
+              <ul>
+                <li>
+                  <img class="forecast-icon" src="img/01d.svg" alt="sunny" />
+                </li>
+                <li class="info">
+                  <img
+                    class="forecast-temp-icon"
+                    src="img/020-thermometer.svg"
+                    title="Maximum Temperature"
+                  />
+                </li>
+                <li class="info">
+                  <img
+                    class="forecast-temp-icon"
+                    src="img/018-thermometer.svg"
+                    title="Minimum Temperature"
+                  />
+                </li>
+                <li class="info">
+                  <img
+                    class="forecast-temp-icon"
+                    src="img/017-wind.svg"
+                    title="Wind Speed"
+                  />
+                </li>
+                <li class="info">
+                  <img
+                    class="forecast-temp-icon"
+                    src="img/007-drops.svg"
+                    title="Humidity"
+                  />
+                </li>
+              </ul>
+            </div>`;
+  });
+  forecast.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+
 function displayWeather(response) {
   let cityHeading = document.querySelector("h1");
   let country = document.querySelector(".country");
@@ -162,3 +213,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 searchCity("Porto");
+displayForecast();
