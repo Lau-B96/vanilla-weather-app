@@ -110,7 +110,12 @@ function displayForecast() {
             </div>`;
   });
   forecast.innerHTML = forecastHTML;
-  console.log(forecastHTML);
+}
+
+function getForecast(coordinates) {
+  let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
@@ -146,6 +151,8 @@ function displayWeather(response) {
   currentDate.innerHTML = formatDate(
     (response.data.dt + (timeZoneOffset - 3600)) * 1000
   );
+
+  getForecast(response.data.coord);
 }
 
 function showPosition(position) {
@@ -213,4 +220,3 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 searchCity("Porto");
-displayForecast();
