@@ -94,7 +94,6 @@ function displayForecast(response) {
   let forecast = document.querySelector("#forecast-section");
 
   let forecastDays = response.data.daily;
-  console.log(forecastDays);
 
   let forecastHTML = "";
   forecastDays.forEach(function (forecastDay, index) {
@@ -187,7 +186,9 @@ function displayWeather(response) {
   tempDescription.innerHTML = response.data.weather[0].description;
   maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)} ºC`;
   minTemp.innerHTML = `${Math.round(response.data.main.temp_min)} ºC`;
-  wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
+  wind.innerHTML = `${Math.round(
+    (response.data.wind.speed * 3600) / 1000
+  )} km/h`;
   humidity.innerHTML = `${Math.round(response.data.main.humidity)} %`;
   weatherIcon.setAttribute("src", `img/${icon}.svg`);
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
