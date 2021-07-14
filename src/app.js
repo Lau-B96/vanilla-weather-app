@@ -62,59 +62,102 @@ function searchForCity(event) {
   }
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDate();
+  let weekDay = date.getDay();
+  let month = date.getMonth();
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  let forecastDate = `${days[weekDay]}, ${months[month]} ${day}`;
+
+  return forecastDate;
+}
+
+function displayForecast(response) {
   let forecast = document.querySelector("#forecast-section");
 
-  let forecastDays = ["Thu", "Fri", "Sat"];
+  let forecastDays = response.data.daily;
+  console.log(forecastDays);
 
   let forecastHTML = "";
-  forecastDays.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecastDays.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
     <div class="col days">
-              <div class="day-title">${day}</div>
+              <div class="day-title">${formatDay(forecastDay.dt)}</div>
               <ul>
                 <li>
-                  <img class="forecast-icon" src="img/01d.svg" alt="sunny" />
+                  <img class="forecast-icon" src="img/${
+                    forecastDay.weather[0].icon
+                  }.svg" alt="${forecastDay.weather[0].description}" />
                 </li>
                 <li class="info">
                   <img
                     class="forecast-temp-icon"
                     src="img/020-thermometer.svg"
                     title="Maximum Temperature"
-                  />
+                  /> <span id="forecast-temp-max">${Math.round(
+                    forecastDay.temp.max
+                  )} º</span>
+                  
                 </li>
                 <li class="info">
                   <img
                     class="forecast-temp-icon"
                     src="img/018-thermometer.svg"
                     title="Minimum Temperature"
-                  />
+                  /> <span id="forecast-temp-min">${Math.round(
+                    forecastDay.temp.min
+                  )} º</span>
+                  
                 </li>
                 <li class="info">
                   <img
                     class="forecast-temp-icon"
                     src="img/017-wind.svg"
                     title="Wind Speed"
-                  />
+                  /> <span id="forecast-wind">${Math.round(
+                    forecastDay.wind_speed
+                  )} km/h</span>
                 </li>
                 <li class="info">
                   <img
                     class="forecast-temp-icon"
                     src="img/007-drops.svg"
-                    title="Humidity"
-                  />
+                    title="Humidity" 
+                  /> <span id="forecast-humidity">${Math.round(
+                    forecastDay.humidity
+                  )} %</span>
                 </li>
               </ul>
             </div>`;
+    }
   });
   forecast.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
   let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -142,10 +185,10 @@ function displayWeather(response) {
   country.innerHTML = response.data.sys.country;
   temp.innerHTML = Math.round(response.data.main.temp);
   tempDescription.innerHTML = response.data.weather[0].description;
-  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)}ºC`;
-  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)}ºC`;
+  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)} ºC`;
+  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)} ºC`;
   wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
-  humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
+  humidity.innerHTML = `${Math.round(response.data.main.humidity)} %`;
   weatherIcon.setAttribute("src", `img/${icon}.svg`);
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
   currentDate.innerHTML = formatDate(
