@@ -108,7 +108,9 @@ function displayForecast(response) {
                 <li>
                   <img class="forecast-icon" src="img/${
                     forecastDay.weather[0].icon
-                  }.svg" alt="${forecastDay.weather[0].description}" />
+                  }.svg" alt="${forecastDay.weather[0].description}" title="${
+          forecastDay.weather[0].description
+        }"/>
                 </li>
                 <li class="info">
                   <img
@@ -193,6 +195,7 @@ function displayWeather(response) {
   humidity.innerHTML = `${Math.round(response.data.main.humidity)} %`;
   weatherIcon.setAttribute("src", `img/${icon}.svg`);
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
+  weatherIcon.setAttribute("title", response.data.weather[0].description);
   currentDate.innerHTML = formatDate(
     (response.data.dt + (timeZoneOffset - 3600)) * 1000
   );
