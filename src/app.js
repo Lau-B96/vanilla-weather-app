@@ -102,6 +102,7 @@ function displayForecast(response) {
         forecastHTML +
         `
     <div class="col days">
+    
               <div class="day-title">${formatDay(forecastDay.dt)}</div>
               <ul>
                 <li>
@@ -114,9 +115,9 @@ function displayForecast(response) {
                     class="forecast-temp-icon"
                     src="img/020-thermometer.svg"
                     title="Maximum Temperature"
-                  /> <span id="forecast-temp-max">${Math.round(
+                  /> <span class="forecast-temp-max">${Math.round(
                     forecastDay.temp.max
-                  )} º</span>
+                  )} ºC</span>
                   
                 </li>
                 <li class="info">
@@ -124,9 +125,9 @@ function displayForecast(response) {
                     class="forecast-temp-icon"
                     src="img/018-thermometer.svg"
                     title="Minimum Temperature"
-                  /> <span id="forecast-temp-min">${Math.round(
+                  /> <span class="forecast-temp-min">${Math.round(
                     forecastDay.temp.min
-                  )} º</span>
+                  )} ºC</span>
                   
                 </li>
                 <li class="info">
@@ -134,8 +135,8 @@ function displayForecast(response) {
                     class="forecast-temp-icon"
                     src="img/017-wind.svg"
                     title="Wind Speed"
-                  /> <span id="forecast-wind">${Math.round(
-                    forecastDay.wind_speed
+                  /> <span class="forecast-wind">${Math.round(
+                    (forecastDay.wind_speed * 3600) / 1000
                   )} km/h</span>
                 </li>
                 <li class="info">
@@ -143,7 +144,7 @@ function displayForecast(response) {
                     class="forecast-temp-icon"
                     src="img/007-drops.svg"
                     title="Humidity" 
-                  /> <span id="forecast-humidity">${Math.round(
+                  /> <span class="forecast-humidity">${Math.round(
                     forecastDay.humidity
                   )} %</span>
                 </li>
@@ -213,42 +214,6 @@ function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-function displayFahrenheitTemperature(event) {
-  event.preventDefault();
-
-  let temp = document.querySelector("#current-temperature");
-  let maxTemp = document.querySelector("#max-temp-today");
-  let minTemp = document.querySelector("#min-temp-today");
-
-  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
-  let fahrenheitMaxTemp = (celsiusMaxTemperature * 9) / 5 + 32;
-  let fahrenheitMinTemp = (celsiusMinTemperature * 9) / 5 + 32;
-
-  temp.innerHTML = Math.round(fahrenheitTemp);
-  maxTemp.innerHTML = `${Math.round(fahrenheitMaxTemp)}ºF`;
-  minTemp.innerHTML = `${Math.round(fahrenheitMinTemp)}ºF`;
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-}
-
-function displayCelsiusTemperature(event) {
-  event.preventDefault();
-
-  let temp = document.querySelector("#current-temperature");
-  let maxTemp = document.querySelector("#max-temp-today");
-  let minTemp = document.querySelector("#min-temp-today");
-
-  temp.innerHTML = Math.round(celsiusTemperature);
-  maxTemp.innerHTML = `${Math.round(celsiusMaxTemperature)}ºC`;
-  minTemp.innerHTML = `${Math.round(celsiusMinTemperature)}ºC`;
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-}
-
-let celsiusTemperature = null;
-let celsiusMaxTemperature = null;
-let celsiusMinTemperature = null;
-
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", searchForCity);
 let searchButton = document.querySelector("#search-button");
@@ -256,11 +221,5 @@ searchButton.addEventListener("click", searchForCity);
 
 let geoButton = document.querySelector("#location-button");
 geoButton.addEventListener("click", getCurrentPosition);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 searchCity("Porto");

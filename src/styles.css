@@ -99,7 +99,7 @@ div.units {
 }
 
 .units small {
-  font-size: 12px;
+  font-size: 18px;
   position: relative;
   top: 16.5px;
 }
@@ -107,9 +107,18 @@ div.units {
 .today-info {
   margin-bottom: 30px;
 }
+
 .days {
   padding: 10px;
   transition: all ease-in-out;
+}
+
+.day-title {
+  font-size: 15px;
+  font-variant-caps: small-caps;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: normal;
 }
 
 .days:hover {
@@ -148,12 +157,4 @@ div.units {
 .info {
   font-size: 13px;
   text-align: center;
-}
-
-.day-title {
-  font-size: 14px;
-  font-variant-caps: small-caps;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 5px;
 }
